@@ -49,7 +49,7 @@ publish() { \
 	tmpdir=$(mktemp -d)
 	printf "<!DOCTYPE html>\\n<html lang=\"en\">\\n<head>\\n<title>%s</title>\\n<link rel='stylesheet' type='text/css' href='%s'>\\n<meta charset='utf-8'/>\\n</head>\\n<body>\\n<h1>%s</h1>\\n<small>[<a href='%s#%s'>link</a>&mdash;<a href='%s'>standalone</a>]</small>\\n%s\\n<footer>by <strong><a href='%s'>%s</a></strong></footer>\\n</body>\\n\\n</html>" "$realname" "$css" "$realname" "../$blogfile" "$base" "$basefile" "$(cat "$webdir/blog/.drafts/$basefile")" "$website" "$name" > "$webdir/blog/$basefile"
 	printf "\\n<item>\\n<title>%s</title>\\n<guid>%s%s#%s</guid>\\n<pubDate>%s</pubDate>\\n<description><![CDATA[\\n%s\\n]]></description>\\n</item>\\n\\n" "$realname" "$website" "$blogfile" "$base" "$rssdate" "$(cat "$webdir/blog/.drafts/$basefile")" >  "$tmpdir/rss"
-	printf "\\n<article><h2 id='%s' class='collapsible'>%s</h2>\\n<div class='content'><small>[<a href='#%s'>link</a>]</small>\\n%s\\n<small>%s</small>\\n</div>\\n</article>" "$base" "$realname" "$base" "blog/$basefile" "$(cat "$webdir/blog/.drafts/$basefile")" "$webdate" > "$tmpdir/html"
+	printf "<article>\\n<h2 id='%s' class='collapsible'>%s</h2>\\n<div class='content'><small>[<a href='#%s'>link</a>]</small>\\n%s\\n<small>%s</small>\\n</div></article>\\n" "$base" "$realname" "$base" "$(cat "$webdir/blog/.drafts/$basefile")" "$webdate" > "$tmpdir/html"
 	printf "<li>%s &ndash; <a href=\"blog/%s\">%s</a></li>\\n" "$(date '+%Y %b %d')" "$basefile" "$realname" > "$tmpdir/index"
 	sed -i "/<!-- LB -->/r $tmpdir/html" "$blogfile"
 	sed -i "/<!-- LB -->/r $tmpdir/rss" "$rssfile"
