@@ -1,142 +1,117 @@
-.blog {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.post {
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ccc;
-}
-
-.post h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.post p {
-    font-size: 16px;
-    line-height: 1.5;
-}
-
-.post-meta {
-    font-style: italic;
-    color: #999;
+h3,
+p {
+  padding: 3px;
+  margin: 0px;
 }
 
 .nav {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed; /* Make it stick/fixed */
+  top: 0; /* Stay on top */
+  width: 100%;
 }
 
 .nav li {
-    float: left;
+  float: left;
 }
 
 .nav li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 .nav li a:hover {
-    background-color: #111;
+  background-color: #111;
 }
 
 /* Define your color variables here */
 :root {
-    --primary-color: #6c757d;
-    /* gray */
-    --secondary-color: #f8f9fa;
-    /* light gray */
-    --accent-color: #17a2b8;
-    /* teal */
+  --primary-color: #393939;
+  /* gray */
+  --secondary-color: #f8f9fa;
+  /* light gray */
+  --accent-color: #17a2b8;
+  /* teal */
+}
+
+html,
+body,
+select,
+input,
+textarea,
+button {
+  font-size: 13px;
+  line-height: 19px;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  margin-bottom: 19px;
+}
+
+p {
+  max-width: 800px;
+}
+
+p:last-child {
+  margin-bottom: 0px;
+}
+
+.txt p {
+  text-indent: 28.5px;
+}
+
+.txt p:first-child {
+  text-indent: 0;
 }
 
 /* Use your color variables for different elements here */
 body {
-    background-color: white;
-    /* change this to white */
-    color: var(--primary-color);
-    /* change this to gray */
-    font-family: Arial, sans-serif;
-}
-
-.nav {
-    background-color: var(--primary-color);
-    overflow: hidden;
-    position: fixed; /* Make it stick/fixed */
-    top: 0; /* Stay on top */
-    width: 100%;
-}
-
-.nav li a {
-    color: var(--secondary-color);
-}
-
-.nav li a:hover {
-    background-color: var(--accent-color);
-}
-
-.blog h2 {
-    color: var(--primary-color);
-}
-
-.blog p {
-    color: var(--accent-color);
-}
-
-.nav {
-    background-color: var(--primary-color);
-}
-
-.nav li a {
-    color: var(--secondary-color);
-}
-
-.nav li a:hover {
-    background-color: var(--accent-color);
-}
-
-.blog h2 {
-    color: var(--primary-color);
-}
-
-.blog p {
-    color: var(--accent-color);
+  background-color: white;
+  /* change this to white */
+  color: var(--primary-color);
+  /* change this to gray */
+  font-family: "DCA", Helvetica, Arial, Verdana, sans-serif;
 }
 
 /* Create a fixed column on the left */
 .fixed-column {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 200px;
-    margin-left: 20px;
-    /* adjust this according to your preference */
-    overflow-y: auto;
+  position: fixed;
+  left: 50px;
+  top: 150px;
+  bottom: 0;
+  width: 300px;
+  /*margin-left: 50px;*/
+  /* adjust this according to your preference */
+  overflow-y: auto;
 }
 
 /* Create a scrollable content area on the right */
 .scrollable-content {
-    margin-left: 225px;
-    /* same as fixed column width */
-    overflow-x: scroll;
+  margin-left: 400px;
+  margin-top: 125px;
+
+  /* same as fixed column width */
+  /*overflow-x: scroll;*/
 }
 
-.fixed-column {
-    margin-top: 60px;
-    /* adjust this according to your preference */
-}
+@media screen and (max-width: 800px) {
+  .fixed-column {
+    position: static;
+    width: 100%;
+  }
 
-.scrollable-content {
-    margin-top: 60px;
-    /* same as fixed column margin-top */
+  .scrollable-content {
+    margin-left: 0;
+    width: 100%;
+  }
 }
 
 /* Style the button that is used to open and close the collapsible content */
@@ -144,20 +119,21 @@ body {
   background-color: #eee;
   color: #444;
   cursor: pointer;
-  padding: 18px;
+  padding: 15px;
   width: 90%;
   border: none;
   text-align: left;
   outline: none;
-  font-size: 15px;
+  font-size: 13px;
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .collapsible:hover {
+.active,
+.collapsible:hover {
 }
 
 .collapsible:after {
-  content: '\002B';
+  content: "\002B";
   color: #444;
   font-weight: bold;
   float: right;
@@ -167,7 +143,6 @@ body {
 .active.collapsible:after {
   content: "\2212";
 }
-
 
 /* Style the collapsible content. Note: hidden by default */
 .content {
