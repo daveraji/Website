@@ -5,14 +5,14 @@ p {
 }
 
 .nav {
-  list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: white;
   position: fixed; /* Make it stick/fixed */
-  top: 0; /* Stay on top */
+  top: 0px; /* Stay on top */
   width: 100%;
+  text-align: center;
 }
 
 .nav li {
@@ -20,15 +20,43 @@ p {
 }
 
 .nav li a {
-  display: block;
-  color: white;
+  display: inline-block;
+  color: rgb(16, 16, 16);
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
 
 .nav li a:hover {
-  background-color: #111;
+  background-color: #bfbfbf;
+}
+
+.navbar {
+  color: rgb(16, 16, 16);
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  position: fixed; /* Make it stick/fixed */
+  top: 0px; /* Stay on top */
+}
+
+.navbar ul {
+  display: inline-block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+}
+
+.navbar li {
+  text-decoration: none;
+  display: inline-block;
+  padding: 14px 16px;
+}
+
+.navbar a {
+  display: block;
+  padding: 10px;
 }
 
 /* Define your color variables here */
