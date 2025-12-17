@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peak Task - Focus on What Matters</title>
+    <style>
+        :root {
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --accent-color: #3B82F6;
+            /* Blue typical of iOS apps */
+            --secondary-text: #a1a1aa;
+            --card-bg: #1c1c1e;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 0 60px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #a1a1aa);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--secondary-text);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-image {
+            margin-top: 60px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            max-width: 100%;
+            width: 300px;
+            /* Adjust based on image aspect ratio */
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        section.alt-bg {
+            background-color: #0f0f10;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .feature-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-text p {
+            font-size: 1.1rem;
+            color: var(--secondary-text);
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .feature-img {
+            width: 100%;
+            max-width: 320px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Pricing */
+        .pricing-card {
+            background-color: var(--card-bg);
+            padding: 50px;
+            border-radius: 24px;
+            text-align: center;
+            max-width: 420px;
+            margin: 0 auto;
+            border: 1px solid #333;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .price span {
+            font-size: 1.1rem;
+            color: var(--secondary-text);
+            font-weight: 400;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin-bottom: 40px;
+            margin-top: 30px;
+        }
+
+        .features-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            color: var(--accent-color);
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--secondary-text);
+            border-top: 1px solid #333;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: var(--secondary-text);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+            }
+
+            .feature-grid .feature-img {
+                max-width: 280px;
+                order: -1;
+            }
+
+            .pricing-card {
+                padding: 30px;
+            }
+
+            /* Alternate order for alternating layouts on mobile to always put image first */
+            .feature-grid.reverse .feature-img {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <a href="index.html" class="logo">David Raji</a>
+            <!-- Maybe navigation back to home? -->
+        </header>
+
+        <section class="hero">
+            <h1>Stop feeling overwhelmed.<br>Start making progress.</h1>
+            <p>Peak Task helps you focus on the one most important task so you can make meaningful progress every day.
+            </p>
+            <a href="https://apps.apple.com/ca/app/peak-task/id6756218539" class="download-btn">Download on App
+                Store</a>
+            <br>
+            <!-- Hero Image: Restored -->
+        </section>
+    </div>
+
+    <!-- Feature 1: Focus (List View) -->
+    <section class="alt-bg">
+        <div class="container">
+            <div class="feature-grid">
+                <div class="feature-text">
+                    <h3>Focus on What Matters</h3>
+                    <p>Instead of simply checking off a to-do list, Peak Task helps you identify the single task that
+                        deserves your attention first.</p>
+                    <p>Add your tasks with two quick inputs: <strong>Duration</strong> and <strong>Importance</strong>.
+                        Peak Task instantly ranks your entire list.</p>
+                    <p><em>The goal isn’t to do everything — it’s to do the right thing.</em></p>
+                </div>
+                <div>
+                    <!-- List View Image -->
+                    <img src="assets/images/peaktask_list.png" alt="Ranked Task List" class="feature-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature 2: Speed (Action/Keyboard) -->
+    <section>
+        <div class="container">
+            <!-- Reverse Layout for visual interest -->
+            <div class="feature-grid reverse">
+                <div style="order: 2;">
+                    <!-- Image area but using content for Reverse effect in styles if needed, here simplified with flex/grid order -->
+                    <!-- Speed/Typing Image -->
+                    <img src="assets/images/peaktask_widget.png" alt="Peak Task Widget" class="feature-img">
+                </div>
+                <div class="feature-text" style="order: 1;"> <!-- Text -->
+                    <h3>Built for Speed</h3>
+                    <p>Open the app → start typing instantly.</p>
+                    <p>With just 1–4 taps, your task is added, categorized, and ranked. We designed Peak Task for zero
+                        clutter and zero friction so you can spend less time managing tasks and more time doing them.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature 3: Widget -->
+    <section class="alt-bg">
+        <div class="container">
+            <div class="feature-grid">
+                <div class="feature-text">
+                    <h3>Right on Your Home Screen</h3>
+                    <p>The Peak Task widget displays only your #1 most important task, keeping your priority front and
+                        center all day long.</p>
+                    <p>Your most important task is always just one look away, and you can mark it complete right from
+                        the home screen without even opening the app.</p>
+                </div>
+                <div>
+                    <!-- Widget Image -->
+                    <img src="assets/images/peaktask_hero.png" alt="Peak Task App Interface" class="hero-image">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing / Premium -->
+    <section>
+        <div class="container">
+            <div class="section-title">Unlock Full Potential</div>
+            <div class="pricing-card">
+                <div style="font-size: 1.2rem; font-weight: 600; color: white; margin-bottom: 10px;">Peak Task Premium
+                </div>
+                <div class="price">$0.99 <span>/month</span></div>
+                <div class="price" style="font-size: 1.5rem; margin-top: -15px;">or $4.99 <span>/year</span></div>
+                <ul class="features-list">
+                    <li>Unlimited tasks</li>
+                    <li>Advanced formatting options</li>
+                    <li>Peak task completion tracking (coming soon)</li>
+                    <li>Support independent development</li>
+                </ul>
+                <a href="https://apps.apple.com/ca/app/peak-task/id6756218539" class="download-btn"
+                    style="width: 100%; box-sizing: border-box; text-align: center;">Get Premium</a>
+                <p style="font-size: 0.9rem; color: #666; margin-top: 20px;">Cancel anytime in iOS settings.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials / Benefits -->
+    <section class="alt-bg">
+        <div class="container" style="text-align: center;">
+            <div class="section-title">Why People Love Peak Task</div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+                <div
+                    style="background: #1c1c1e; padding: 30px; border-radius: 20px; max-width: 300px; flex: 1 1 250px;">
+                    <h4 style="font-size: 1.2rem; margin-bottom: 10px;">Automatic Focus</h4>
+                    <p style="color: var(--secondary-text);">Highlights your #1 priority automatically so you never have
+                        to guess what to do next.</p>
+                </div>
+                <div
+                    style="background: #1c1c1e; padding: 30px; border-radius: 20px; max-width: 300px; flex: 1 1 250px;">
+                    <h4 style="font-size: 1.2rem; margin-bottom: 10px;">Ultra-Fast</h4>
+                    <p style="color: var(--secondary-text);">No menus, no complexity. Just open the app and type to add
+                        tasks instantly.</p>
+                </div>
+                <div
+                    style="background: #1c1c1e; padding: 30px; border-radius: 20px; max-width: 300px; flex: 1 1 250px;">
+                    <h4 style="font-size: 1.2rem; margin-bottom: 10px;">Clean Design</h4>
+                    <p style="color: var(--secondary-text);">A distraction-free interface designed to help you maintain
+                        flow and focus.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 David Raji</p>
+            <p><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Terms of Use</a></p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
