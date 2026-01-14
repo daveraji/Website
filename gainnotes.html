@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peak Task - Focus on What Matters</title>
+    <title>GainNotes - Simple Gym Tracker</title>
     <style>
         :root {
             --bg-color: #000000;
             --text-color: #ffffff;
-            --accent-color: #0ea5e9;
-            /* Sky blue typical of the new UI */
+            --accent-color: #FA8072;
+            /* Salmon color */
             --secondary-text: #a1a1aa;
             --card-bg: #1c1c1e;
         }
@@ -22,7 +22,6 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
         .container {
@@ -56,7 +55,7 @@
             font-size: 2.8rem;
             line-height: 1.1;
             margin-bottom: 15px;
-            background: linear-gradient(to right, #fff, #0ea5e9);
+            background: linear-gradient(to right, #fff, #fa8072);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -77,17 +76,14 @@
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+            transition: transform 0.2s;
         }
 
-        .hero-image {
-            margin-top: 40px;
-            border-radius: 24px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
-            max-width: 100%;
-            width: 200px;
+        .download-btn:hover {
+            transform: scale(1.05);
         }
+
+        /* Hero Image not present in GainNotes but sections have images */
 
         /* Sections */
         section {
@@ -95,14 +91,13 @@
         }
 
         section.alt-bg {
-            background-color: #09090b;
+            background-color: #0f0f10;
         }
 
         .section-title {
             font-size: 1.8rem;
             text-align: center;
             margin-bottom: 40px;
-            font-weight: 700;
         }
 
         .feature-grid {
@@ -115,7 +110,6 @@
         .feature-text h3 {
             font-size: 1.6rem;
             margin-bottom: 12px;
-            color: white;
         }
 
         .feature-text p {
@@ -136,20 +130,19 @@
 
         /* Pricing */
         .pricing-card {
-            background: linear-gradient(145deg, #1c1c1e, #09090b);
+            background-color: var(--card-bg);
             padding: 30px;
             border-radius: 24px;
             text-align: center;
             max-width: 400px;
             margin: 0 auto;
-            border: 1px solid #27272a;
+            border: 1px solid #333;
         }
 
         .price {
             font-size: 2.8rem;
-            font-weight: 800;
+            font-weight: 700;
             margin: 15px 0;
-            color: white;
         }
 
         .price span {
@@ -173,7 +166,7 @@
         }
 
         .features-list li::before {
-            content: "✦";
+            content: "✓";
             color: var(--accent-color);
             margin-right: 12px;
             font-weight: bold;
@@ -185,35 +178,24 @@
             text-align: center;
             padding: 40px 0;
             color: var(--secondary-text);
-            border-top: 1px solid #18181b;
+            border-top: 1px solid #333;
             margin-top: 20px;
         }
 
         footer a {
             color: var(--secondary-text);
-            text-decoration: none;
-            margin: 0 10px;
-            font-size: 0.95rem;
-        }
-
-        footer a:hover {
-            color: white;
             text-decoration: underline;
         }
 
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .container {
-                padding: 0 24px;
+                font-size: 2.2rem;
             }
 
             .feature-grid {
                 grid-template-columns: 1fr;
                 text-align: center;
-                gap: 50px;
+                gap: 40px;
             }
 
             .feature-grid .feature-img {
@@ -221,12 +203,12 @@
                 order: -1;
             }
 
-            .feature-grid.reverse .feature-img {
-                order: -1;
+            .pricing-card {
+                padding: 30px;
             }
 
-            section {
-                padding: 70px 0;
+            .feature-grid.reverse .feature-img {
+                order: -1;
             }
         }
     </style>
@@ -240,106 +222,83 @@
         </header>
 
         <section class="hero">
-            <h1>Reach New Heights.<br>One Task at a Time.</h1>
-            <p>Peak Task turns your daily productivity into an adventure. Build momentum, climb milestones, and conquer
-                your goals.</p>
-            <a href="https://apps.apple.com/ca/app/peak-task/id6756218539" class="download-btn">Download on App
-                Store</a>
-            <br>
-            <img src="assets/images/peaktask_main.png" alt="Peak Task Main Interface" class="hero-image">
+            <h1>Fitness tracking<br>made simple.</h1>
+            <p>GainNotes is the zero-friction workout tracker designed for your flow. No clutter, just gains.</p>
+            <a href="https://apps.apple.com/ca/app/gainnotes-simple-gym-tracker/id6757085848"
+                class="download-btn">Download on App Store</a>
         </section>
     </div>
 
-    <!-- Feature 1: Elevation/Rewards -->
+    <!-- Feature 1: Built for Flow (Home Screen) -->
     <section class="alt-bg">
         <div class="container">
             <div class="feature-grid">
                 <div class="feature-text">
-                    <h3>Ascend to Success</h3>
-                    <p>With every completed Peak Task, your height increases. Go from molehill to mountains as you build
-                        consistent habits.</p>
-                    <p>Unlock real-world geographic milestones like the <strong>Crater rim of Kerið</strong> or the
-                        <strong>Coastal cliffs of Dover</strong> as you reach new elevation levels.
-                    </p>
+                    <h3>Built for Your Flow</h3>
+                    <p>Stop wrestling with complex menus. GainNotes features a clean, minimal interface that gets out of
+                        your way.</p>
+                    <p>Start an empty workout with one tap, or use custom <strong>Templates</strong> to jump straight
+                        into your routine.</p>
                 </div>
                 <div>
-                    <img src="assets/images/peaktask_milestones.png" alt="Elevation Milestones" class="feature-img">
+                    <img src="assets/images/gainnotes_home.png" alt="GainNotes Home Screen" class="feature-img">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Feature 2: Focus (Dark Mode) -->
+    <!-- Feature 2: Smart Memory (Active Session) -->
     <section>
         <div class="container">
             <div class="feature-grid reverse">
                 <div style="order: 2;">
-                    <img src="assets/images/peaktask_dark.png" alt="Peak Task Dark Mode" class="feature-img">
+                    <img src="assets/images/gainnotes_session.png" alt="GainNotes Active Session" class="feature-img">
                 </div>
                 <div class="feature-text" style="order: 1;">
-                    <h3>Unrivaled Clarity</h3>
-                    <p>Stop drowning in a sea of tasks. Peak Task uses a smart ranking system to identify the #1 thing
-                        you need to do right now.</p>
-                    <p>No clutter, no distractions—just a beautifully designed interface that helps you maintain deep
-                        focus throughout the day.</p>
+                    <h3>Workout with Memory</h3>
+                    <p>GainNotes remembers your progress so you don't have to. Previous weights and reps are visible
+                        right where you need them.</p>
+                    <p>With <strong>Smart Fill</strong>, clicking 'Rest' automatically logs your previous performance if
+                        you haven't made changes. Keep your momentum going.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Feature 3: History & Persistence -->
+    <!-- Feature 3: History & Sharing -->
     <section class="alt-bg">
         <div class="container">
             <div class="feature-grid">
                 <div class="feature-text">
-                    <h3>Track Your Journey</h3>
-                    <p>Your history is more than just a list of checked boxes. It's a record of your upward climb.</p>
-                    <p>Review your past successes and see exactly how much height you've gained with each productive
-                        day.</p>
+                    <h3>Track Your Gains</h3>
+                    <p>Every set, every rep, every victory. Review your full workout history with clear summaries and
+                        detailed breakdowns.</p>
+                    <p>Share your achievements with friends or export your data to keep your progress visible.</p>
                 </div>
                 <div>
-                    <img src="assets/images/peaktask_history.png" alt="Workout History Breakdown" class="feature-img">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Feature 4: Widget -->
-    <section>
-        <div class="container">
-            <div class="feature-grid reverse">
-                <div style="order: 2;">
-                    <img src="assets/images/peaktask_new_widget.png" alt="Peak Task iOS Widget" class="feature-img">
-                </div>
-                <div class="feature-text" style="order: 1;">
-                    <h3>Always Within Reach</h3>
-                    <p>Keep your most important task front and center with our revamped iOS widget.</p>
-                    <p>Mark tasks complete and manage your day directly from your home screen without ever opening the
-                        app. Productivity at the speed of thought.</p>
+                    <img src="assets/images/gainnotes_detail.png" alt="Workout History Breakdown" class="feature-img">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Pricing / Premium -->
-    <section class="alt-bg">
+    <section>
         <div class="container">
             <div class="section-title">Unlock Full Potential</div>
             <div class="pricing-card">
-                <div style="font-size: 1.3rem; font-weight: 600; color: white; margin-bottom: 10px;">Peak Task Premium
-                </div>
+                <div style="font-size: 1.2rem; font-weight: 600; color: white; margin-bottom: 10px;">GainNotes Pro</div>
                 <div class="price">$0.99 <span>/month</span></div>
-                <div class="price" style="font-size: 1.6rem; margin-top: -15px;">or $4.99 <span>/year</span></div>
+                <div class="price" style="font-size: 1.5rem; margin-top: -15px;">or $4.99 <span>/year</span></div>
                 <ul class="features-list">
-                    <li>Unlimited Ranked Projects</li>
-                    <li>Unlock All Elevation Milestones</li>
-                    <li>iCloud Sync & Backup</li>
+                    <li>Unlimited Workout Templates</li>
+                    <li>iCloud Sync Across Devices</li>
+                    <li>No Ads, Just Focus</li>
                     <li>Support Independent Development</li>
                 </ul>
-                <a href="https://apps.apple.com/ca/app/peak-task/id6756218539" class="download-btn"
-                    style="width: 100%; box-sizing: border-box; text-align: center;">Go Premium</a>
-                <p style="font-size: 0.9rem; color: #666; margin-top: 25px;">Available on the App Store. Cancel anytime.
-                </p>
+                <a href="https://apps.apple.com/ca/app/gainnotes-simple-gym-tracker/id6757085848" class="download-btn"
+                    style="width: 100%; box-sizing: border-box; text-align: center;">Get GainNotes Pro</a>
+                <p style="font-size: 0.9rem; color: #666; margin-top: 20px;">Cancel anytime in iOS settings.</p>
             </div>
         </div>
     </section>
@@ -347,11 +306,7 @@
     <footer>
         <div class="container">
             <p>&copy; 2025 David Raji</p>
-            <p>
-                <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Terms</a>
-                <a href="privacy.html">Privacy</a>
-                <a href="index.html">Home</a>
-            </p>
+            <p><a href="privacy.html">Privacy Policy</a> | <a href="https://davidraji.com">Home</a></p>
         </div>
     </footer>
 
