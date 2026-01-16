@@ -210,10 +210,12 @@
             background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
             border-radius: 24px;
             border: 1px solid #27272a;
-            padding: 40px;
+            padding: 0;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             max-width: 500px;
             margin: 40px auto;
+            overflow: hidden;
+            height: 600px;
         }
 
         .demo-header {
@@ -232,173 +234,8 @@
             color: var(--secondary-text);
         }
 
-        .task-input-section {
-            margin-bottom: 24px;
-        }
-
-        .input-group {
-            margin-bottom: 12px;
-        }
-
-        .input-group label {
-            display: block;
-            font-size: 0.85rem;
-            color: var(--secondary-text);
-            margin-bottom: 6px;
-            font-weight: 500;
-        }
-
-        .input-group input,
-        .input-group select {
-            width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            border: 1px solid #27272a;
-            background: #0a0a0a;
-            color: white;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: border-color 0.2s;
-        }
-
-        .input-group input:focus,
-        .input-group select:focus {
-            outline: none;
-            border-color: var(--accent-color);
-        }
-
-        .slider-group {
-            margin-bottom: 12px;
-        }
-
-        .slider-label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            color: var(--secondary-text);
-            margin-bottom: 8px;
-        }
-
-        .slider-value {
-            color: var(--accent-color);
-            font-weight: 600;
-        }
-
-        input[type="range"] {
-            width: 100%;
-            height: 6px;
-            border-radius: 5px;
-            background: #27272a;
-            outline: none;
-            -webkit-appearance: none;
-            appearance: none;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: var(--accent-color);
-            cursor: pointer;
-        }
-
-        input[type="range"]::-moz-range-thumb {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: var(--accent-color);
-            cursor: pointer;
-            border: none;
-        }
-
-        .add-task-btn {
-            width: 100%;
-            padding: 14px;
-            background: var(--accent-color);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .add-task-btn:hover {
-            background: #0284c7;
-            transform: translateY(-1px);
-        }
-
-        .tasks-list {
-            margin-top: 30px;
-        }
-
-        .task-item {
-            background: #0a0a0a;
-            border: 1px solid #27272a;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.2s;
-        }
-
-        .task-item:hover {
-            border-color: var(--accent-color);
-        }
-
-        .task-info {
-            flex: 1;
-        }
-
-        .task-title {
-            color: white;
-            font-weight: 600;
-            margin-bottom: 6px;
-            font-size: 1rem;
-        }
-
-        .task-meta {
-            font-size: 0.8rem;
-            color: var(--secondary-text);
-        }
-
-        .task-score {
-            background: var(--accent-color);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            margin-right: 12px;
-        }
-
-        .delete-btn {
-            background: #27272a;
-            color: var(--secondary-text);
-            border: none;
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .delete-btn:hover {
-            background: #ef4444;
-            color: white;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--secondary-text);
-        }
-
         @media (max-width: 768px) {
+
             h1 {
                 font-size: 2rem;
             }
@@ -472,7 +309,7 @@
                 </p>
 
                 <div class="demo-container" style="padding: 0; overflow: hidden; height: 600px;">
-                    <iframe src="peaktask_app/index.html" style="width: 100%; height: 100%; border: none;"
+                    <iframe src="https://peaktask-7a830.web.app" style="width: 100%; height: 100%; border: none;"
                         title="Peak Task App Demo"></iframe>
                 </div>
             </div>
@@ -528,118 +365,6 @@
                 <a href="projects.html">Projects</a>
             </p>
         </footer>
-    </div>
-
-    <script>
-        // Task management
-        let tasks = [];
-        let taskIdCounter = 0;
-
-        // Elements
-        const taskTitleInput = document.getElementById('task-title-input');
-        const importanceSlider = document.getElementById('importance-slider');
-        const durationSlider = document.getElementById('duration-slider');
-        const importanceValue = document.getElementById('importance-value');
-        const durationValue = document.getElementById('duration-value');
-        const addTaskBtn = document.getElementById('add-task-btn');
-        const tasksList = document.getElementById('tasks-list');
-
-        // Update slider values
-        importanceSlider.addEventListener('input', (e) => {
-            importanceValue.textContent = e.target.value;
-        });
-
-        durationSlider.addEventListener('input', (e) => {
-            durationValue.textContent = e.target.value;
-        });
-
-        // Add task on button click
-        addTaskBtn.addEventListener('click', addTask);
-
-        // Add task on Enter key
-        taskTitleInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                addTask();
-            }
-        });
-
-        function addTask() {
-            const title = taskTitleInput.value.trim();
-            const importance = parseInt(importanceSlider.value);
-            const duration = parseInt(durationSlider.value);
-
-            if (!title) {
-                taskTitleInput.focus();
-                return;
-            }
-
-            // Calculate score (importance squared divided by duration)
-            const score = Math.round((importance * importance) / (duration / 10));
-
-            const task = {
-                id: taskIdCounter++,
-                title,
-                importance,
-                duration,
-                score
-            };
-
-            tasks.push(task);
-            sortTasks();
-            renderTasks();
-
-            // Reset form
-            taskTitleInput.value = '';
-            importanceSlider.value = 5;
-            durationSlider.value = 30;
-            importanceValue.textContent = '5';
-            durationValue.textContent = '30';
-            taskTitleInput.focus();
-        }
-
-        function deleteTask(id) {
-            tasks = tasks.filter(task => task.id !== id);
-            renderTasks();
-        }
-
-        function sortTasks() {
-            tasks.sort((a, b) => b.score - a.score);
-        }
-
-        function renderTasks() {
-            if (tasks.length === 0) {
-                tasksList.innerHTML = `
-                    <div class="empty-state">
-                        <p>No tasks yet. Add your first task above!</p>
-                    </div>
-                `;
-                return;
-            }
-
-            tasksList.innerHTML = tasks.map(task => `
-                <div class="task-item">
-                    <div class="task-info">
-                        <div class="task-title">${escapeHtml(task.title)}</div>
-                        <div class="task-meta">
-                            Importance: ${task.importance}/10 • Duration: ${task.duration}min
-                        </div>
-                    </div>
-                    <span class="task-score">${task.score}</span>
-                    <button class="delete-btn" onclick="deleteTask(${task.id})">✕</button>
-                </div>
-            `).join('');
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        // Initialize
-        renderTasks();
-    </script>
-
     </div>
 
 </body>
