@@ -4,15 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peak Task - Focus on What Matters</title>
+    <title>Building Peak Task - A Journey</title>
     <style>
         :root {
             --bg-color: #000000;
-            --text-color: #ffffff;
+            --text-color: #e5e5e5;
             --accent-color: #0ea5e9;
-            /* Sky blue typical of the new UI */
             --secondary-text: #a1a1aa;
-            --card-bg: #1c1c1e;
+            --link-color: #60a5fa;
         }
 
         body {
@@ -21,163 +20,164 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
+            line-height: 1.8;
         }
 
         .container {
-            max-width: 960px;
+            max-width: 720px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
         /* Header */
         header {
-            padding: 20px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 30px 0;
+            border-bottom: 1px solid #27272a;
         }
 
         .logo {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: white;
-            text-decoration: none;
-        }
-
-        /* Hero */
-        .hero {
-            text-align: center;
-            padding: 40px 0 30px;
-        }
-
-        .hero h1 {
-            font-size: 2.8rem;
-            line-height: 1.1;
-            margin-bottom: 15px;
-            background: linear-gradient(to right, #fff, #0ea5e9);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
+            font-weight: 600;
+            font-size: 1rem;
             color: var(--secondary-text);
-            max-width: 500px;
-            margin: 0 auto 30px;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .logo:hover {
+            color: white;
+        }
+
+        /* Article */
+        article {
+            padding: 60px 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            color: white;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--secondary-text);
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .byline {
+            font-size: 0.95rem;
+            color: var(--secondary-text);
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #27272a;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+            color: var(--text-color);
+        }
+
+        strong {
+            color: white;
+            font-weight: 600;
+        }
+
+        .highlight {
+            background: linear-gradient(to right, rgba(14, 165, 233, 0.1), rgba(14, 165, 233, 0));
+            border-left: 3px solid var(--accent-color);
+            padding: 20px 24px;
+            margin: 32px 0;
+            font-size: 1.15rem;
+            color: white;
+        }
+
+        /* Images Section */
+        .images-section {
+            margin: 60px 0;
+            padding: 50px 0;
+            border-top: 1px solid #27272a;
+            border-bottom: 1px solid #27272a;
+        }
+
+        .images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .app-image {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .image-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+            margin-top: 12px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            margin: 60px 0;
+            padding: 50px 30px;
+            background: linear-gradient(145deg, #0a0a0a, #111);
+            border-radius: 20px;
+            border: 1px solid #27272a;
+        }
+
+        .cta-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .premium-features {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .premium-features li {
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .premium-features li::before {
+            content: "✦";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
         }
 
         .download-btn {
             display: inline-block;
             background-color: var(--accent-color);
             color: white;
-            padding: 10px 28px;
+            padding: 14px 32px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+            margin-top: 20px;
         }
 
-        .hero-image {
-            margin-top: 40px;
-            border-radius: 24px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
-            max-width: 100%;
-            width: 200px;
-        }
-
-        /* Sections */
-        section {
-            padding: 50px 0;
-        }
-
-        section.alt-bg {
-            background-color: #09090b;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            text-align: center;
-            margin-bottom: 40px;
-            font-weight: 700;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .feature-text h3 {
-            font-size: 1.6rem;
-            margin-bottom: 12px;
-            color: white;
-        }
-
-        .feature-text p {
-            font-size: 1.05rem;
-            color: var(--secondary-text);
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        .feature-img {
-            width: 100%;
-            max-width: 220px;
-            border-radius: 24px;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-            display: block;
-            margin: 0 auto;
-        }
-
-        /* Pricing */
-        .pricing-card {
-            background: linear-gradient(145deg, #1c1c1e, #09090b);
-            padding: 30px;
-            border-radius: 24px;
-            text-align: center;
-            max-width: 400px;
-            margin: 0 auto;
-            border: 1px solid #27272a;
-        }
-
-        .price {
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin: 15px 0;
-            color: white;
-        }
-
-        .price span {
-            font-size: 1.1rem;
-            color: var(--secondary-text);
-            font-weight: 400;
-        }
-
-        .features-list {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-            margin: 25px 0;
-        }
-
-        .features-list li {
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            font-size: 1rem;
-        }
-
-        .features-list li::before {
-            content: "✦";
-            color: var(--accent-color);
-            margin-right: 12px;
-            font-weight: bold;
-            font-size: 1.1rem;
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
         }
 
         /* Footer */
@@ -185,15 +185,14 @@
             text-align: center;
             padding: 40px 0;
             color: var(--secondary-text);
-            border-top: 1px solid #18181b;
-            margin-top: 20px;
+            border-top: 1px solid #27272a;
+            font-size: 0.9rem;
         }
 
         footer a {
             color: var(--secondary-text);
             text-decoration: none;
             margin: 0 10px;
-            font-size: 0.95rem;
         }
 
         footer a:hover {
@@ -202,31 +201,17 @@
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
+            h1 {
+                font-size: 2rem;
             }
 
-            .container {
-                padding: 0 24px;
+            .images-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
             }
 
-            .feature-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 50px;
-            }
-
-            .feature-grid .feature-img {
-                max-width: 220px;
-                order: -1;
-            }
-
-            .feature-grid.reverse .feature-img {
-                order: -1;
-            }
-
-            section {
-                padding: 70px 0;
+            .cta-section {
+                padding: 40px 20px;
             }
         }
     </style>
@@ -236,124 +221,95 @@
 
     <div class="container">
         <header>
-            <a href="index.html" class="logo">David Raji</a>
+            <a href="index.html" class="logo">← David Raji</a>
         </header>
 
-        <section class="hero">
-            <h1>Reach New Heights.<br>One Task at a Time.</h1>
-            <p>Peak Task turns your daily productivity into an adventure. Build momentum, climb milestones, and conquer
-                your goals.</p>
-            <a href="https://apps.apple.com/ca/app/peak-task/id6756218539" class="download-btn">Download on App
-                Store</a>
-            <br>
-            <img src="assets/images/peaktask_main.png" alt="Peak Task Main Interface" class="hero-image">
-        </section>
-    </div>
+        <article>
+            <h1>Why I Built Peak Task</h1>
+            <p class="subtitle">Climbing the mountain that is life, one task at a time</p>
+            <div class="byline">David Raji · January 2026</div>
 
-    <!-- Feature 1: Elevation/Rewards -->
-    <section class="alt-bg">
-        <div class="container">
-            <div class="feature-grid">
-                <div class="feature-text">
-                    <h3>Ascend to Success</h3>
-                    <p>With every completed Peak Task, your height increases. Go from molehill to mountains as you build
-                        consistent habits.</p>
-                    <p>Unlock real-world geographic milestones like the <strong>Crater rim of Kerið</strong> or the
-                        <strong>Coastal cliffs of Dover</strong> as you reach new elevation levels.
-                    </p>
-                </div>
-                <div>
-                    <img src="assets/images/peaktask_milestones.png" alt="Elevation Milestones" class="feature-img">
+            <p>I had a problem.</p>
+
+            <p>My to-do list was 74 items long. Every morning I'd open it and feel overwhelmed. I'd pick something.
+                Anything. Just to feel productive.</p>
+
+            <p>But I wasn't doing <strong>the most important thing</strong>.</p>
+
+            <p>I was busy, not effective.</p>
+
+            <p>So I started looking for a to-do app that could automatically rank my tasks. I tried everything. None of
+                them worked the way I needed.</p>
+
+            <div class="highlight">
+                I decided to build it myself.
+            </div>
+
+            <p>But ranking tasks wasn't enough. I wanted to stay motivated. That's when the idea hit me:
+                <strong>climbing the mountain that is life</strong>.</p>
+
+            <p>Every completed Peak Task would add to your height. You'd start at ground level. But over time, you'd
+                ascend. First to hills. Then to cliffs. Eventually to mountains.</p>
+
+            <p>Real mountains. Real places.</p>
+
+            <p>So I learned Flutter. I started simple. A list. A ranking algorithm. A stopwatch that tracked your
+                height.</p>
+
+            <p>I showed it to friends. They had ideas. Each iteration made it better.</p>
+
+            <p>The result is Peak Task.</p>
+
+            <!-- Images Section -->
+            <div class="images-section">
+                <div class="images-grid">
+                    <div>
+                        <img src="assets/images/peaktask_main.png" alt="Introducing Peak Task" class="app-image">
+                    </div>
+                    <div>
+                        <img src="assets/images/peaktask_dark.png" alt="Build ranked to-do lists" class="app-image">
+                    </div>
+                    <div>
+                        <img src="assets/images/peaktask_history.png" alt="Your height increases" class="app-image">
+                    </div>
+                    <div>
+                        <img src="assets/images/peaktask_milestones.png" alt="From molehills to mountains"
+                            class="app-image">
+                    </div>
+                    <div>
+                        <img src="assets/images/peaktask_new_widget.png" alt="iOS Widget" class="app-image">
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Feature 2: Focus (Dark Mode) -->
-    <section>
-        <div class="container">
-            <div class="feature-grid reverse">
-                <div style="order: 2;">
-                    <img src="assets/images/peaktask_dark.png" alt="Peak Task Dark Mode" class="feature-img">
-                </div>
-                <div class="feature-text" style="order: 1;">
-                    <h3>Unrivaled Clarity</h3>
-                    <p>Stop drowning in a sea of tasks. Peak Task uses a smart ranking system to identify the #1 thing
-                        you need to do right now.</p>
-                    <p>No clutter, no distractions—just a beautifully designed interface that helps you maintain deep
-                        focus throughout the day.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <h2>Ready to Start Climbing?</h2>
+                <p style="color: var(--secondary-text); max-width: 500px; margin: 20px auto;">Peak Task is free to use.
+                    Upgrade to Premium for the full experience:</p>
 
-    <!-- Feature 3: History & Persistence -->
-    <section class="alt-bg">
-        <div class="container">
-            <div class="feature-grid">
-                <div class="feature-text">
-                    <h3>Track Your Journey</h3>
-                    <p>Your history is more than just a list of checked boxes. It's a record of your upward climb.</p>
-                    <p>Review your past successes and see exactly how much height you've gained with each productive
-                        day.</p>
-                </div>
-                <div>
-                    <img src="assets/images/peaktask_history.png" alt="Workout History Breakdown" class="feature-img">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Feature 4: Widget -->
-    <section>
-        <div class="container">
-            <div class="feature-grid reverse">
-                <div style="order: 2;">
-                    <img src="assets/images/peaktask_new_widget.png" alt="Peak Task iOS Widget" class="feature-img">
-                </div>
-                <div class="feature-text" style="order: 1;">
-                    <h3>Always Within Reach</h3>
-                    <p>Keep your most important task front and center with our revamped iOS widget.</p>
-                    <p>Mark tasks complete and manage your day directly from your home screen without ever opening the
-                        app. Productivity at the speed of thought.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing / Premium -->
-    <section class="alt-bg">
-        <div class="container">
-            <div class="section-title">Unlock Full Potential</div>
-            <div class="pricing-card">
-                <div style="font-size: 1.3rem; font-weight: 600; color: white; margin-bottom: 10px;">Peak Task Premium
-                </div>
-                <div class="price">$0.99 <span>/month</span></div>
-                <div class="price" style="font-size: 1.6rem; margin-top: -15px;">or $4.99 <span>/year</span></div>
-                <ul class="features-list">
-                    <li>Unlimited Ranked Projects</li>
-                    <li>Unlock All Elevation Milestones</li>
-                    <li>iCloud Sync & Backup</li>
-                    <li>Support Independent Development</li>
+                <ul class="premium-features">
+                    <li>Unlimited active tasks</li>
+                    <li>Shared collaborative lists</li>
+                    <li>Support independent development</li>
                 </ul>
-                <a href="https://apps.apple.com/ca/app/peak-task/id6756218539" class="download-btn"
-                    style="width: 100%; box-sizing: border-box; text-align: center;">Go Premium</a>
-                <p style="font-size: 0.9rem; color: #666; margin-top: 25px;">Available on the App Store. Cancel anytime.
-                </p>
-            </div>
-        </div>
-    </section>
 
-    <footer>
-        <div class="container">
+                <a href="https://apps.apple.com/ca/app/peak-task/id6756218539" class="download-btn">Download on App
+                    Store</a>
+                <p style="font-size: 0.85rem; color: #666; margin-top: 20px;">$0.99/month or $4.99/year</p>
+            </div>
+
+        </article>
+
+        <footer>
             <p>&copy; 2025 David Raji</p>
             <p>
-                <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Terms</a>
                 <a href="privacy.html">Privacy</a>
                 <a href="index.html">Home</a>
+                <a href="projects.html">Projects</a>
             </p>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
 </body>
 
