@@ -180,6 +180,51 @@
             box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
         }
 
+        /* App Store Buttons Section */
+        .app-store-section {
+            text-align: center;
+            padding: 40px 0 20px 0;
+            margin-bottom: 20px;
+        }
+
+        .app-store-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .app-store-btn {
+            display: inline-block;
+            height: 60px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+        }
+
+        .app-store-btn:hover {
+            transform: translateY(-3px);
+            filter: drop-shadow(0 8px 20px rgba(14, 165, 233, 0.4));
+        }
+
+        .app-store-btn img {
+            height: 100%;
+            width: auto;
+        }
+
+        .app-store-section h2 {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .app-store-section p {
+            color: var(--secondary-text);
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -262,6 +307,24 @@
         <header>
             <a href="index.html" class="logo">← David Raji</a>
         </header>
+
+        <!-- App Store Buttons Section -->
+        <div class="app-store-section">
+            <h2>Download Peak Task</h2>
+            <p>Available now on iOS and Android</p>
+            <div class="app-store-buttons">
+                <a href="https://apps.apple.com/ca/app/peak-task/id6756218539" class="app-store-btn" target="_blank"
+                    rel="noopener">
+                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                        alt="Download on the App Store">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.daver.peaktask" class="app-store-btn"
+                    target="_blank" rel="noopener">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                        alt="Get it on Google Play">
+                </a>
+            </div>
+        </div>
 
         <article>
             <h1>Why I Built Peak Task</h1>
@@ -346,11 +409,20 @@
                     <li>Unlimited active tasks</li>
                     <li>Shared collaborative lists</li>
                     <li>Support independent development</li>
-                    <a href="https://apps.apple.com/ca/app/peak-task/id6756218539" class="download-btn">Download on
-                        App
-                        Store</a>
                 </ul>
 
+                <div class="app-store-buttons" style="margin-top: 30px;">
+                    <a href="https://apps.apple.com/ca/app/peak-task/id6756218539" class="app-store-btn" target="_blank"
+                        rel="noopener">
+                        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                            alt="Download on the App Store">
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.daver.peaktask" class="app-store-btn"
+                        target="_blank" rel="noopener">
+                        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                            alt="Get it on Google Play">
+                    </a>
+                </div>
 
                 <p style="font-size: 0.85rem; color: #556; margin-top: 20px;">$0.99/month or $4.99/year</p>
             </div>
