@@ -4,312 +4,521 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GainNotes - Simple Gym Tracker</title>
+    <title>GainNotes - Simple Gym Tracker & Workout Logger</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="GainNotes is a minimal and powerful workout logger for gym enthusiasts. Track sets, reps, and PRs with a zero-friction interface.">
+    <meta name="keywords"
+        content="gym tracker, workout logger, weightlifting app, fitness tracker, PR tracker, bodybuilding, strength training">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #000000;
-            --text-color: #ffffff;
-            --accent-color: #FA8072;
-            /* Salmon color */
-            --secondary-text: #a1a1aa;
-            --card-bg: #1c1c1e;
+            --bg-black: #000000;
+            --accent-color: #ff7a6a;
+            /* GainNotes Salmon/Coral */
+            --accent-glow: rgba(255, 122, 106, 0.3);
+            --text-white: #ffffff;
+            --text-gray: #d1d5db;
+            --card-bg: #0a0a0a;
+            --card-border: #1f2937;
+            --radius-xl: 32px;
+            --radius-l: 24px;
+            --radius-m: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        /* Atmospheric Glows */
+        .glow-left {
+            position: fixed;
+            top: 20%;
+            left: -10%;
+            width: 40%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(255, 122, 106, 0.15) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glow-right {
+            position: fixed;
+            bottom: 10%;
+            right: -10%;
+            width: 50%;
+            height: 70%;
+            background: radial-gradient(circle, rgba(239, 68, 68, 0.1) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
         }
 
         .container {
-            max-width: 960px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
-        /* Header */
-        header {
-            padding: 20px 0;
+        /* Navigation */
+        nav {
+            padding: 40px 0;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
         }
 
-        .logo {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: white;
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--text-white);
             text-decoration: none;
+            letter-spacing: -1px;
         }
 
-        /* Hero */
+        /* Hero Section */
         .hero {
+            padding: 60px 0 100px;
             text-align: center;
-            padding: 40px 0 30px;
         }
 
-        .hero h1 {
-            font-size: 2.8rem;
-            line-height: 1.1;
-            margin-bottom: 15px;
-            background: linear-gradient(to right, #fff, #fa8072);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: var(--secondary-text);
-            max-width: 500px;
-            margin: 0 auto 30px;
-        }
-
-        .download-btn {
+        .badge {
             display: inline-block;
-            background-color: var(--accent-color);
+            background: var(--accent-color);
             color: white;
-            padding: 10px 28px;
-            border-radius: 30px;
-            text-decoration: none;
+            padding: 6px 16px;
+            border-radius: 100px;
             font-weight: 600;
-            transition: transform 0.2s;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px var(--accent-glow);
         }
 
-        .download-btn:hover {
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto 48px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .store-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .store-btn:hover {
             transform: scale(1.05);
         }
 
-        /* Hero Image not present in GainNotes but sections have images */
-
-        /* Sections */
-        section {
-            padding: 50px 0;
+        .store-btn.apple img {
+            height: 44px;
         }
 
-        section.alt-bg {
-            background-color: #0f0f10;
+        .store-btn.google img {
+            height: 66px;
         }
 
-        .section-title {
-            font-size: 1.8rem;
-            text-align: center;
-            margin-bottom: 40px;
+        /* Side-by-side Screens Gallery */
+        .screens-gallery {
+            padding: 40px 0 100px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            perspective: 1000px;
+        }
+
+        .screen-item {
+            width: 240px;
+            flex-shrink: 0;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--card-border);
+            transition: transform 0.4s ease, filter 0.4s ease;
+            cursor: pointer;
+        }
+
+        .screen-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            z-index: 10;
+        }
+
+        .screen-item:nth-child(odd) {
+            transform: translateY(20px);
+        }
+
+        .screen-item:nth-child(even) {
+            transform: translateY(-20px);
+        }
+
+        .screen-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 23px;
+            display: block;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
         }
 
         .feature-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
         }
 
-        .feature-text h3 {
-            font-size: 1.6rem;
+        .feature-item {
+            text-align: left;
+            padding: 32px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-l);
+            transition: border-color 0.3s;
+        }
+
+        .feature-item:hover {
+            border-color: var(--accent-color);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: #1a1a1a;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
             margin-bottom: 12px;
         }
 
-        .feature-text p {
-            font-size: 1.05rem;
-            color: var(--secondary-text);
-            margin-bottom: 15px;
+        .feature-item p {
+            color: var(--text-gray);
+            font-size: 1rem;
             line-height: 1.6;
         }
 
-        .feature-img {
-            width: 100%;
-            max-width: 220px;
-            border-radius: 24px;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-            display: block;
-            margin: 0 auto;
+        /* Large Impact Sections */
+        .impact-section {
+            padding: 80px 0;
         }
 
-        /* Pricing */
-        .pricing-card {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 24px;
-            text-align: center;
-            max-width: 400px;
-            margin: 0 auto;
-            border: 1px solid #333;
-        }
-
-        .price {
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin: 15px 0;
-        }
-
-        .price span {
-            font-size: 1.1rem;
-            color: var(--secondary-text);
-            font-weight: 400;
-        }
-
-        .features-list {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-            margin: 25px 0;
-        }
-
-        .features-list li {
-            margin-bottom: 12px;
-            display: flex;
+        .impact-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             align-items: center;
-            font-size: 1rem;
         }
 
-        .features-list li::before {
-            content: "✓";
-            color: var(--accent-color);
-            margin-right: 12px;
-            font-weight: bold;
+        .impact-content {
+            padding: 60px;
+        }
+
+        .impact-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .impact-content p {
             font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 32px;
+        }
+
+        .impact-image {
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-top: 60px;
+            overflow: hidden;
+        }
+
+        .impact-image img {
+            width: 55%;
+            border-radius: 20px 20px 0 0;
+            border: 1px solid var(--card-border);
+            border-bottom: none;
+            box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .impact-card.accent {
+            background: linear-gradient(135deg, #ff7a6a 0%, #000000 100%);
+        }
+
+        /* Download CTA */
+        .download-cta {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .download-cta h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 40px;
         }
 
         /* Footer */
         footer {
+            padding: 100px 0 60px;
             text-align: center;
-            padding: 40px 0;
-            color: var(--secondary-text);
-            border-top: 1px solid #333;
-            margin-top: 20px;
+            border-top: 1px solid #1a1a1a;
         }
 
-        footer a {
-            color: var(--secondary-text);
-            text-decoration: underline;
+        .footer-logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 24px;
+            display: block;
         }
 
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #444;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
             }
 
+            .impact-card {
+                grid-template-columns: 1fr;
+            }
+
+            .impact-image {
+                padding-top: 0;
+            }
+
+            .impact-image img {
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
             .feature-grid {
                 grid-template-columns: 1fr;
-                text-align: center;
-                gap: 40px;
             }
 
-            .feature-grid .feature-img {
-                max-width: 220px;
-                order: -1;
+            .impact-content {
+                padding: 40px 24px;
             }
 
-            .pricing-card {
-                padding: 30px;
-            }
-
-            .feature-grid.reverse .feature-img {
-                order: -1;
+            h1 {
+                font-size: 2.5rem;
             }
         }
     </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
+    <div class="glow-left"></div>
+    <div class="glow-right"></div>
 
     <div class="container">
-        <header>
-            <a href="index.html" class="logo">David Raji</a>
-        </header>
+        <nav>
+            <a href="index.html" class="nav-logo">GainNotes</a>
+        </nav>
 
         <section class="hero">
-            <h1>Fitness tracking<br>made simple.</h1>
-            <p>GainNotes is the zero-friction workout tracker designed for your flow. No clutter, just gains.</p>
-            <a href="https://apps.apple.com/ca/app/gainnotes-simple-gym-tracker/id6757085848"
-                class="download-btn">Download on App Store</a>
+            <span class="badge">Built for Your Flow</span>
+            <h1>Log Your Gains.<br>Minimal Effort.</h1>
+            <p class="hero-description">The zero-friction gym tracker designed to stay out of your way and focus on what
+                matters: your progress.</p>
+
+            <div class="cta-buttons">
+                <a href="https://apps.apple.com/ca/app/gainnotes-simple-gym-tracker/id6757085848"
+                    class="store-btn apple" target="_blank" rel="noopener">
+                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                        alt="Download on the App Store">
+                </a>
+                <a href="#" class="store-btn google" target="_blank" rel="noopener">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                        alt="Get it on Google Play">
+                </a>
+            </div>
         </section>
+
+        <section class="screens-gallery">
+            <div class="screen-item">
+                <img src="assets/images/gainnotes_home.png" alt="GainNotes Home">
+            </div>
+            <div class="screen-item">
+                <img src="assets/images/gainnotes_active_session.png" alt="Active Session Logging">
+            </div>
+            <div class="screen-item">
+                <img src="assets/images/gainnotes_history_detail.png" alt="Workout History Breakdown">
+            </div>
+            <div class="screen-item">
+                <img src="assets/images/gainnotes_home.png" alt="Gym Tracker Discovery">
+            </div>
+            <div class="screen-item">
+                <img src="assets/images/gainnotes_active_session.png" alt="Lifting Progress">
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon"><i data-lucide="dumbbell"></i></div>
+                    <h3>Seamless Logging</h3>
+                    <p>Track your sets, reps, and weight with a clean, one-tap interface designed for use while
+                        training.
+                    </p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i data-lucide="zap"></i></div>
+                    <h3>Smart Fill</h3>
+                    <p>GainNotes remembers your last performance and auto-fills your values, so you can focus on the
+                        lift.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i data-lucide="award"></i></div>
+                    <h3>PR Tracking</h3>
+                    <p>Visually track your personal records for every exercise and see your strength grow over time.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i data-lucide="clipboard-list"></i></div>
+                    <h3>Smart Templates</h3>
+                    <p>Create custom templates for your routine and jump straight into your workout with zero setup.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i data-lucide="history"></i></div>
+                    <h3>Detailed History</h3>
+                    <p>Review every past session with beautiful summaries and detailed exercise-by-exercise breakdowns.
+                    </p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i data-lucide="cloud"></i></div>
+                    <h3>iCloud Sync</h3>
+                    <p>Your data stays in sync across all your devices, ensuring your logs are always where you need
+                        them.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="impact-section">
+            <div class="impact-card">
+                <div class="impact-content">
+                    <h2>Track Your Gains.</h2>
+                    <p>Stop wrestling with complex apps. GainNotes gives you a clear, distraction-free view of your
+                        session, allowing you to focus purely on your performance.</p>
+                </div>
+                <div class="impact-image">
+                    <img src="assets/images/gainnotes_active_session.png" alt="Workout Tracking">
+                </div>
+            </div>
+        </section>
+
+        <section class="impact-section">
+            <div class="impact-card accent">
+                <div class="impact-content">
+                    <h2>Review Your Success.</h2>
+                    <p>Look back at your journey with detailed workout summaries. See exactly how many exercises you've
+                        crushed and how long your sessions lasted.</p>
+                </div>
+                <div class="impact-image">
+                    <img src="assets/images/gainnotes_history_detail.png" alt="History Breakdown">
+                </div>
+            </div>
+        </section>
+
+        <section class="download-cta">
+            <h2>Download GainNotes</h2>
+            <div class="cta-buttons">
+                <a href="https://apps.apple.com/ca/app/gainnotes-simple-gym-tracker/id6757085848"
+                    class="store-btn apple" target="_blank" rel="noopener">
+                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                        alt="Download on the App Store">
+                </a>
+                <a href="#" class="store-btn google" target="_blank" rel="noopener">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                        alt="Get it on Google Play">
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <span class="footer-logo">GainNotes</span>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="index.html">David Raji</a>
+                <a href="mailto:david@gainnotes.app">Support</a>
+            </div>
+            <p class="copyright">&copy; 2026 David Raji. All rights reserved.</p>
+        </footer>
     </div>
-
-    <!-- Feature 1: Built for Flow (Home Screen) -->
-    <section class="alt-bg">
-        <div class="container">
-            <div class="feature-grid">
-                <div class="feature-text">
-                    <h3>Built for Your Flow</h3>
-                    <p>Stop wrestling with complex menus. GainNotes features a clean, minimal interface that gets out of
-                        your way.</p>
-                    <p>Start an empty workout with one tap, or use custom <strong>Templates</strong> to jump straight
-                        into your routine.</p>
-                </div>
-                <div>
-                    <img src="assets/images/gainnotes_home.png" alt="GainNotes Home Screen" class="feature-img">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Feature 2: Smart Memory (Active Session) -->
-    <section>
-        <div class="container">
-            <div class="feature-grid reverse">
-                <div style="order: 2;">
-                    <img src="assets/images/gainnotes_session.png" alt="GainNotes Active Session" class="feature-img">
-                </div>
-                <div class="feature-text" style="order: 1;">
-                    <h3>Workout with Memory</h3>
-                    <p>GainNotes remembers your progress so you don't have to. Previous weights and reps are visible
-                        right where you need them.</p>
-                    <p>With <strong>Smart Fill</strong>, clicking 'Rest' automatically logs your previous performance if
-                        you haven't made changes. Keep your momentum going.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Feature 3: History & Sharing -->
-    <section class="alt-bg">
-        <div class="container">
-            <div class="feature-grid">
-                <div class="feature-text">
-                    <h3>Track Your Gains</h3>
-                    <p>Every set, every rep, every victory. Review your full workout history with clear summaries and
-                        detailed breakdowns.</p>
-                    <p>Share your achievements with friends or export your data to keep your progress visible.</p>
-                </div>
-                <div>
-                    <img src="assets/images/gainnotes_detail.png" alt="Workout History Breakdown" class="feature-img">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing / Premium -->
-    <section>
-        <div class="container">
-            <div class="section-title">Unlock Full Potential</div>
-            <div class="pricing-card">
-                <div style="font-size: 1.2rem; font-weight: 600; color: white; margin-bottom: 10px;">GainNotes Pro</div>
-                <div class="price">$0.99 <span>/month</span></div>
-                <div class="price" style="font-size: 1.5rem; margin-top: -15px;">or $4.99 <span>/year</span></div>
-                <ul class="features-list">
-                    <li>Unlimited Workout Templates</li>
-                    <li>iCloud Sync Across Devices</li>
-                    <li>No Ads, Just Focus</li>
-                    <li>Support Independent Development</li>
-                </ul>
-                <a href="https://apps.apple.com/ca/app/gainnotes-simple-gym-tracker/id6757085848" class="download-btn"
-                    style="width: 100%; box-sizing: border-box; text-align: center;">Get GainNotes Pro</a>
-                <p style="font-size: 0.9rem; color: #666; margin-top: 20px;">Cancel anytime in iOS settings.</p>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 David Raji</p>
-            <p><a href="privacy.html">Privacy Policy</a> | <a href="https://davidraji.com">Home</a></p>
-        </div>
-    </footer>
-
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 
 </html>
