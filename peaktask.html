@@ -4,441 +4,562 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Building Peak Task - A Journey</title>
+    <title>PeakTask - Climb Your Way to Productivity</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="PeakTask is a unique to-do list app that helps you prioritize tasks using a ranking algorithm and rewards your productivity with mountain elevation.">
+    <meta name="keywords"
+        content="to-do list, productivity, task manager, habit tracker, mountain climbing, elevation, ranked tasks">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #000000;
-            --text-color: #e5e5e5;
+            --bg-black: #000000;
             --accent-color: #0ea5e9;
-            --secondary-text: #a1a1aa;
-            --link-color: #60a5fa;
+            --accent-glow: rgba(14, 165, 233, 0.3);
+            --text-white: #ffffff;
+            --text-gray: #d1d5db;
+            --card-bg: #0a0a0a;
+            --card-border: #1f2937;
+            --radius-xl: 32px;
+            --radius-l: 24px;
+            --radius-m: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.8;
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        /* Atmospheric Glows */
+        .glow-left {
+            position: fixed;
+            top: 20%;
+            left: -10%;
+            width: 40%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glow-right {
+            position: fixed;
+            bottom: 10%;
+            right: -10%;
+            width: 50%;
+            height: 70%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
         }
 
         .container {
-            max-width: 720px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
         }
 
-        /* Header */
-        header {
-            padding: 30px 0;
-            border-bottom: 1px solid #27272a;
+        /* Navigation */
+        nav {
+            padding: 40px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .logo {
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--secondary-text);
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--text-white);
             text-decoration: none;
-            transition: color 0.2s;
+            letter-spacing: -1px;
         }
 
-        .logo:hover {
+        /* Hero Section */
+        .hero {
+            padding: 60px 0 100px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent-color);
             color: white;
-        }
-
-        /* Article */
-        article {
-            padding: 60px 0;
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px var(--accent-glow);
         }
 
         h1 {
-            font-size: 2.5rem;
-            line-height: 1.2;
-            margin-bottom: 16px;
-            color: white;
-            font-weight: 700;
-        }
-
-        .subtitle {
-            font-size: 1.25rem;
-            color: var(--secondary-text);
-            margin-bottom: 40px;
-            font-style: italic;
-        }
-
-        .byline {
-            font-size: 0.95rem;
-            color: var(--secondary-text);
-            margin-bottom: 50px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid #27272a;
-        }
-
-        p {
-            font-size: 1.1rem;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
             margin-bottom: 24px;
-            color: var(--text-color);
+            letter-spacing: -2px;
         }
 
-        strong {
-            color: white;
-            font-weight: 600;
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto 48px;
         }
 
-        .highlight {
-            background: linear-gradient(to right, rgba(14, 165, 233, 0.1), rgba(14, 165, 233, 0));
-            border-left: 3px solid var(--accent-color);
-            padding: 20px 24px;
-            margin: 32px 0;
-            font-size: 1.15rem;
-            color: white;
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
         }
 
-        /* Images Section */
-        .images-section {
-            margin: 60px 0;
-            padding: 50px 0;
-            border-top: 1px solid #27272a;
-            border-bottom: 1px solid #27272a;
+        .store-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .images-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+        .store-btn:hover {
+            transform: scale(1.05);
         }
 
-        .app-image {
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        .store-btn.apple img {
+            height: 44px;
+            /* Apple badge is taller naturally */
         }
 
-        .image-caption {
-            text-align: center;
-            font-size: 0.9rem;
-            color: var(--secondary-text);
-            margin-top: 12px;
+        .store-btn.google img {
+            height: 66px;
+            /* Google badge has more internal padding */
         }
 
-        /* CTA Section */
-        .cta-section {
-            text-align: center;
-            margin: 60px 0;
-            padding: 50px 30px;
-            background: linear-gradient(145deg, #0a0a0a, #111);
-            border-radius: 20px;
-            border: 1px solid #27272a;
-        }
-
-        .cta-section h2 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        .premium-features {
-            list-style: none;
-            padding: 0;
-            margin: 30px 0;
-            text-align: left;
-            display: inline-block;
-        }
-
-        .premium-features li {
-            margin-bottom: 12px;
-            font-size: 1.05rem;
-            padding-left: 30px;
-            position: relative;
-        }
-
-        .premium-features li::before {
-            content: "✦";
-            color: var(--accent-color);
-            position: absolute;
-            left: 0;
-            font-size: 1.2rem;
-        }
-
-        .download-btn {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 14px 32px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
-            margin-top: 20px;
-        }
-
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5);
-        }
-
-        /* App Store Buttons Section */
-        .app-store-section {
-            text-align: center;
-            padding: 40px 0 20px 0;
-            margin-bottom: 20px;
-        }
-
-        .app-store-buttons {
+        /* Side-by-side Screens Gallery */
+        .screens-gallery {
+            padding: 40px 0 100px;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 20px;
+            perspective: 1000px;
         }
 
-        .app-store-btn {
-            display: inline-block;
-            height: 60px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+        .screen-item {
+            width: 240px;
+            flex-shrink: 0;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--card-border);
+            transition: transform 0.4s ease, filter 0.4s ease;
+            cursor: pointer;
         }
 
-        .app-store-btn:hover {
-            transform: translateY(-3px);
-            filter: drop-shadow(0 8px 20px rgba(14, 165, 233, 0.4));
+        .screen-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            z-index: 10;
         }
 
-        .app-store-btn img {
-            height: 100%;
-            width: auto;
+        .screen-item:nth-child(odd) {
+            transform: translateY(20px);
         }
 
-        .app-store-section h2 {
+        .screen-item:nth-child(even) {
+            transform: translateY(-20px);
+        }
+
+        .screen-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 23px;
+            display: block;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .feature-item {
+            text-align: left;
+            padding: 32px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-l);
+            transition: border-color 0.3s;
+        }
+
+        .feature-item:hover {
+            border-color: var(--accent-color);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: #1a1a1a;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
             font-size: 1.5rem;
-            color: white;
-            margin-bottom: 10px;
-            font-weight: 600;
+            color: var(--accent-color);
         }
 
-        .app-store-section p {
-            color: var(--secondary-text);
+        .feature-item h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .feature-item p {
+            color: var(--text-gray);
             font-size: 1rem;
-            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        /* Large Impact Sections */
+        .impact-section {
+            padding: 80px 0;
+        }
+
+        .impact-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+        }
+
+        .impact-content {
+            padding: 60px;
+        }
+
+        .impact-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .impact-content p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 32px;
+        }
+
+        .impact-image {
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-top: 60px;
+            overflow: hidden;
+        }
+
+        .impact-image img {
+            width: 55%;
+            border-radius: 20px 20px 0 0;
+            border: 1px solid var(--card-border);
+            border-bottom: none;
+            box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .impact-card.accent {
+            background: linear-gradient(135deg, #075985 0%, #000000 100%);
+        }
+
+        /* Demo Section */
+        .demo-wrapper {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .demo-container {
+            margin-top: 48px;
+            background: var(--card-bg);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--card-border);
+            overflow: hidden;
+            height: 600px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7);
+        }
+
+        .demo-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Download CTA */
+        .download-cta {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .download-cta h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 40px;
         }
 
         /* Footer */
         footer {
+            padding: 100px 0 60px;
             text-align: center;
-            padding: 40px 0;
-            color: var(--secondary-text);
-            border-top: 1px solid #27272a;
-            font-size: 0.9rem;
+            border-top: 1px solid #1a1a1a;
         }
 
-        footer a {
-            color: var(--secondary-text);
+        .footer-logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
             text-decoration: none;
-            margin: 0 10px;
-        }
-
-        footer a:hover {
-            color: white;
-            text-decoration: underline;
-        }
-
-        /* Demo App Container */
-        .demo-section {
-            margin: 60px 0;
-            padding: 0;
-        }
-
-        .demo-container {
-            background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
-            border-radius: 24px;
-            border: 1px solid #27272a;
-            padding: 0;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            max-width: 500px;
-            margin: 40px auto;
-            overflow: hidden;
-            height: 600px;
-        }
-
-        .demo-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .demo-header h3 {
-            font-size: 1.5rem;
-            color: white;
-            margin-bottom: 8px;
-        }
-
-        .demo-header p {
             font-size: 0.9rem;
-            color: var(--secondary-text);
+            transition: color 0.2s;
         }
 
-        @media (max-width: 768px) {
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #444;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .impact-card {
+                grid-template-columns: 1fr;
+            }
+
+            .impact-image {
+                padding-top: 0;
+            }
+
+            .impact-image img {
+                width: 90%;
+            }
 
             h1 {
-                font-size: 2rem;
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
             }
 
-            .images-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
+            .impact-content {
+                padding: 40px 24px;
             }
 
-            .cta-section {
-                padding: 40px 20px;
-            }
-
-            .demo-container {
-                padding: 24px;
+            h1 {
+                font-size: 2.5rem;
             }
         }
     </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
+    <div class="glow-left"></div>
+    <div class="glow-right"></div>
 
     <div class="container">
-        <header>
-            <a href="index.html" class="logo">← David Raji</a>
-        </header>
+        <nav>
+            <a href="#" class="nav-logo">PeakTask</a>
+        </nav>
 
-        <!-- App Store Buttons Section -->
-        <div class="app-store-section">
-            <h2>Download Peak Task</h2>
-            <p>Available now on iOS and Android</p>
-            <div class="app-store-buttons">
-                <a href="https://apps.apple.com/ca/app/peak-task/id6756218539" class="app-store-btn" target="_blank"
+        <section class="hero">
+            <span class="badge">Elevate Your Workflow</span>
+            <h1>Climb Your Way to<br>Productivity.</h1>
+            <p class="hero-description">The only to-do list app that ranks your tasks automatically and rewards your
+                progress with mountain elevation levels.</p>
+
+            <div class="cta-buttons">
+                <a href="https://apps.apple.com/ca/app/peak-task/id6756218539" class="store-btn apple" target="_blank"
                     rel="noopener">
                     <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
                         alt="Download on the App Store">
                 </a>
-                <a href="https://play.google.com/store/apps/details?id=com.daver.peaktask" class="app-store-btn"
+                <a href="https://play.google.com/store/apps/details?id=com.daver.peaktask" class="store-btn google"
                     target="_blank" rel="noopener">
                     <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
                         alt="Get it on Google Play">
                 </a>
             </div>
-        </div>
+        </section>
 
-        <article>
-            <h1>Why I Built Peak Task</h1>
-            <p class="subtitle">Climbing the mountain that is life, one task at a time</p>
-            <div class="byline">David Raji · January 2026</div>
-
-            <p>I had a problem.</p>
-
-            <p>My to-do list was 74 items long. Every morning I'd open it and feel overwhelmed. I'd pick something.
-                Anything. Just to feel productive.</p>
-
-            <p>But I wasn't doing the most <strong>important </strong>thing.</p>
-
-            <p>I was busy, but not effective.</p>
-
-            <p>So I started looking for a to-do app that could automatically rank my tasks. I tried lots of different
-                systems but they weren't intuitive. None of
-                them worked the way I needed. Just an input of the importance and duration. </p>
-
-            <div class="highlight">
-                So, I decided to try to build it myself.
+        <section class="screens-gallery">
+            <div class="screen-item">
+                <img src="assets/images/screenshot_dark_tasks.png" alt="Dark Mode Task List">
             </div>
+            <div class="screen-item">
+                <img src="assets/images/screenshot_light_tasks.png" alt="Light Mode Task List">
+            </div>
+            <div class="screen-item">
+                <img src="assets/images/screenshot_done_tasks.png" alt="Done Tasks History">
+            </div>
+            <div class="screen-item">
+                <img src="assets/images/screenshot_light_tasks_2.png" alt="Personal Task List">
+            </div>
+            <div class="screen-item">
+                <img src="assets/images/screenshot_congrats.png" alt="Success Milestone">
+            </div>
+        </section>
 
-            <p>Although ranking tasks was a good start, I needed something else to stay motivated. That's when I had the
-                idea:
-                <strong>climbing the mountain that is life</strong>.
-            </p>
-
-            <p>Every completed Peak Task would add to your height. You'd start at ground level. But over time, you'd
-                ascend. First to hills. Then to cliffs. Eventually to mountains. Real places in the world.</p>
-
-            <p>So I learned Flutter. I started simple. A list. A ranking algorithm. A stopwatch that tracked your
-                height.</p>
-
-            <p>I showed it to friends. They had ideas for shared lists, widgets, and more. Each iteration made it
-                better.</p>
-
-            <p>The result is Peak Task.</p>
-
-            <!-- Interactive Demo Section -->
-            <div class="demo-section">
-                <h2 style="text-align: center; color: white; margin-bottom: 16px;">Try It Yourself</h2>
-                <p style="text-align: center; color: var(--secondary-text); margin-bottom: 30px;">
-                    Experience the full Peak Task app right here
-                </p>
-
-                <div class="demo-container" style="padding: 0; overflow: hidden; height: 600px;">
-                    <iframe src="https://peaktask-7a830.web.app" style="width: 100%; height: 100%; border: none;"
-                        title="Peak Task App Demo"></iframe>
+        <section class="features">
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon"><i data-lucide="zap"></i></div>
+                    <h3>Ranked Tasks</h3>
+                    <p>Our algorithm automatically sorts your tasks based on importance and effort, so you always know
+                        what to tackle next.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i data-lucide="mountain"></i></div>
+                    <h3>Elevation Gain</h3>
+                    <p>Every completed task adds to your height. Climb from local hills to the world’s most iconic
+                        summits.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i data-lucide="users"></i></div>
+                    <h3>Shared Lists</h3>
+                    <p>Collaborate with friends and colleagues. Share your lists and conquer mountains together in
+                        real-time.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i data-lucide="layout"></i></div>
+                    <h3>Smart Widgets</h3>
+                    <p>Stay on top of your most important tasks right from your home screen with our beautifully
+                        designed widgets.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i data-lucide="bar-chart-3"></i></div>
+                    <h3>Growth History</h3>
+                    <p>Visualize your progress over time with detailed charts and history. See how far you’ve climbed
+                        each week.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i data-lucide="cloud"></i></div>
+                    <h3>Cloud Sync</h3>
+                    <p>Your tasks and elevation progress are always in sync across all your devices, so you never skip a
+                        beat.</p>
                 </div>
             </div>
+        </section>
 
-            <!-- Images Section -->
-            <div class="images-section">
-                <div class="images-grid">
-                    <div>
-                        <img src="assets/images/peaktask_main.png" alt="Introducing Peak Task" class="app-image">
-                    </div>
-                    <div>
-                        <img src="assets/images/peaktask_dark.png" alt="Build ranked to-do lists" class="app-image">
-                    </div>
-                    <div>
-                        <img src="assets/images/peaktask_history.png" alt="Your height increases" class="app-image">
-                    </div>
-                    <div>
-                        <img src="assets/images/peaktask_milestones.png" alt="From molehills to mountains"
-                            class="app-image">
-                    </div>
-                    <div>
-                        <img src="assets/images/peaktask_new_widget.png" alt="iOS Widget" class="app-image">
-                    </div>
+        <!--
+
+        <section class="impact-section">
+            <div class="impact-card">
+                <div class="impact-content">
+                    <h2>Visualize Your Progress.</h2>
+                    <p>Stop looking at boring lists. Watch your elevation grow as you finish tasks. From Molehills to
+                        Mountains, track your journey through 50+ real-world milestones.</p>
+                </div>
+                <div class="impact-image">
+                    <img src="assets/images/peaktask_milestones.png" alt="Milestones Preview">
                 </div>
             </div>
+        </section>
 
-            <!-- CTA Section -->
-            <div class="cta-section">
-                <h2>Ready to Start Climbing?</h2>
-                <p style="color: var(--secondary-text); max-width: 500px; margin: 20px auto;">Peak Task is free to use.
-                    Upgrade to Premium for the full experience:</p>
-
-                <ul class="premium-features">
-                    <li>Unlimited active tasks</li>
-                    <li>Shared collaborative lists</li>
-                    <li>Support independent development</li>
-                </ul>
-
-                <div class="app-store-buttons" style="margin-top: 30px;">
-                    <a href="https://apps.apple.com/ca/app/peak-task/id6756218539" class="app-store-btn" target="_blank"
-                        rel="noopener">
-                        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                            alt="Download on the App Store">
-                    </a>
-                    <a href="https://play.google.com/store/apps/details?id=com.daver.peaktask" class="app-store-btn"
-                        target="_blank" rel="noopener">
-                        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-                            alt="Get it on Google Play">
-                    </a>
+        <section class="impact-section">
+            <div class="impact-card accent">
+                <div class="impact-content">
+                    <h2>Information at a Glance.</h2>
+                    <p>Our widgets keep your most important tasks front and center. Use the 'Do This Now' widget to
+                        tackle your top priority without even opening the app.</p>
                 </div>
-
-                <p style="font-size: 0.85rem; color: #556; margin-top: 20px;">$0.99/month or $4.99/year</p>
+                <div class="impact-image">
+                    <img src="assets/images/peaktask_new_widget.png" alt="Widget Preview">
+                </div>
             </div>
+        </section>
 
-        </article>
+        <section class="demo-wrapper">
+            <h2>Experience PeakTask Now.</h2>
+            <p style="color: var(--text-gray); margin-top: 16px;">Try the full-featured app right in your browser.</p>
+            <div class="demo-container">
+                <iframe src="https://peaktask-7a830.web.app" title="PeakTask Web Demo"></iframe>
+            </div>
+        </section>
+
+        -->
+
+        <section class="download-cta">
+            <h2>Download PeakTask</h2>
+            <div class="cta-buttons">
+                <a href="https://apps.apple.com/ca/app/peak-task/id6756218539" class="store-btn apple" target="_blank"
+                    rel="noopener">
+                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                        alt="Download on the App Store">
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.daver.peaktask" class="store-btn google"
+                    target="_blank" rel="noopener">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                        alt="Get it on Google Play">
+                </a>
+            </div>
+        </section>
 
         <footer>
-            <p>&copy; 2025 David Raji</p>
-            <p>
-                <a href="privacy.html">Privacy</a>
-                <a href="index.html">Home</a>
-                <a href="projects.html">Projects</a>
-            </p>
+            <span class="footer-logo">PeakTask</span>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="index.html">David Raji</a>
+                <a href="mailto:david@peaktask.app">Support</a>
+            </div>
+            <p class="copyright">&copy; 2026 David Raji. All rights reserved.</p>
         </footer>
     </div>
-
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 
 </html>
