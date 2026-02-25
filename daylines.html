@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daylines - Personalized Daily News Briefing</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Daylines is a personalized news briefing app that distills the world's most important stories into a clean, easy-to-read format tailored to your interests.">
+    <meta name="keywords"
+        content="news app, daily briefing, personalized news, rss reader, news summary, curated news, world news">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-black: #000000;
+            --accent-color: #ffffff;
+            /* Daylines Clean White/Grey */
+            --accent-glow: rgba(255, 255, 255, 0.2);
+            --text-white: #ffffff;
+            --text-gray: #d1d5db;
+            --card-bg: #0a0a0a;
+            --card-border: #1f2937;
+            --radius-xl: 32px;
+            --radius-l: 24px;
+            --radius-m: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        /* Atmospheric Glows */
+        .glow-left {
+            position: fixed;
+            top: 20%;
+            left: -10%;
+            width: 40%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glow-right {
+            position: fixed;
+            bottom: 10%;
+            right: -10%;
+            width: 50%;
+            height: 70%;
+            background: radial-gradient(circle, rgba(156, 163, 175, 0.05) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 40px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--text-white);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 60px 0 100px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent-color);
+            color: black;
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto 48px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .store-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .store-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .store-btn.apple img {
+            height: 44px;
+        }
+
+        .store-btn.google img {
+            height: 66px;
+        }
+
+        /* Side-by-side Screens Gallery */
+        .screens-gallery {
+            padding: 40px 0 100px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            perspective: 1000px;
+        }
+
+        .screen-item {
+            width: 240px;
+            flex-shrink: 0;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--card-border);
+            transition: transform 0.4s ease, filter 0.4s ease;
+            cursor: pointer;
+        }
+
+        .screen-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            z-index: 10;
+        }
+
+        .screen-item:nth-child(odd) {
+            transform: translateY(20px);
+        }
+
+        .screen-item:nth-child(even) {
+            transform: translateY(-20px);
+        }
+
+        .screen-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 23px;
+            display: block;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .feature-item {
+            text-align: left;
+            padding: 32px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-l);
+            transition: border-color 0.3s;
+        }
+
+        .feature-item:hover {
+            border-color: var(--accent-color);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: #1a1a1a;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .feature-item p {
+            color: var(--text-gray);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Large Impact Sections */
+        .impact-section {
+            padding: 80px 0;
+        }
+
+        .impact-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+        }
+
+        .impact-content {
+            padding: 60px;
+        }
+
+        .impact-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .impact-content p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 32px;
+        }
+
+        .impact-image {
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-top: 60px;
+            overflow: hidden;
+        }
+
+        .impact-image img {
+            width: 55%;
+            border-radius: 20px 20px 0 0;
+            border: 1px solid var(--card-border);
+            border-bottom: none;
+            box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .impact-card.accent {
+            background: linear-gradient(135deg, #333333 0%, #000000 100%);
+        }
+
+        /* Download CTA */
+        .download-cta {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .download-cta h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 100px 0 60px;
+            text-align: center;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .footer-logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #444;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .feature-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .impact-card {
+                grid-template-columns: 1fr;
+            }
+
+            .impact-image {
+                padding-top: 0;
+            }
+
+            .impact-image img {
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .impact-content {
+                padding: 40px 24px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="glow-left"></div>
+    <div class="glow-right"></div>
+
+    <div class="container">
+        <nav>
+            <a href="index.html" class="nav-logo">Daylines</a>
+        </nav>
+
+        <section class="hero">
+            <span class="badge">Stay Informed, Simply</span>
+            <h1>Daily News Briefing.<br>Simply Distilled.</h1>
+            <p class="hero-description">The only news app that understands your interests and delivers a personalized
+                briefing every single day.</p>
+
+            <div class="cta-buttons">
+                <!-- Replace with actual URLs when available, using PeakTask as placeholder structure -->
+                <a href="https://apps.apple.com/us/app/daylines/id6758858880" class="store-btn apple">
+                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                        alt="Download on the App Store">
+                </a>
+                <!--
+                <a href="#" class="store-btn google">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                        alt="Get it on Google Play">
+                </a>
+                -->
+            </div>
+        </section>
+
+        <section class="screens-gallery">
+            <div class="screen-item">
+                <img src="assets/images/daylines_feed.png" alt="Daylines Feed">
+            </div>
+            <div class="screen-item">
+                <img src="assets/images/daylines_profile.png" alt="Personalized Profile">
+            </div>
+            <div class="screen-item">
+                <img src="assets/images/daylines_article.png" alt="Article View">
+            </div>
+            <div class="screen-item">
+                <img src="assets/images/daylines_feed.png" alt="Global News">
+            </div>
+            <div class="screen-item">
+                <img src="assets/images/daylines_profile.png" alt="Smart Interests">
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon"><i data-lucide="newspaper"></i></div>
+                    <h3>Personalized Feed</h3>
+                    <p>Content tailored to your interests, location, and reading habits. See what matters to you first.
+                    </p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i data-lucide="zap"></i></div>
+                    <h3>Smart Summaries</h3>
+                    <p>Get the gist of the story in seconds with AI-powered summaries that capture the essential points.
+                    </p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i data-lucide="globe"></i></div>
+                    <h3>Global Sources</h3>
+                    <p>Pulled from high-quality, diverse RSS feeds and top global publishers for a balanced perspective.
+                    </p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i data-lucide="download-cloud"></i></div>
+                    <h3>Offline Reading</h3>
+                    <p>Save stories to read later, even without an internet connection. Perfect for commutes or travel.
+                    </p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i data-lucide="map-pin"></i></div>
+                    <h3>Local Relevance</h3>
+                    <p>Dynamic ranking ensures you're always aware of what's happening in your city and country.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i data-lucide="layers"></i></div>
+                    <h3>Clean Interface</h3>
+                    <p>Zero clutter, zero distractions. Just high-quality news in a premium, dark-mode design.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="impact-section">
+            <div class="impact-card">
+                <div class="impact-content">
+                    <h2>Your Interests, Simplified.</h2>
+                    <p>Select your favorite topics, from politics to technology. Daylines uses these to build your
+                        perfect daily briefing, highlighting the stories that align with your passions.</p>
+                </div>
+                <div class="impact-image">
+                    <img src="assets/images/daylines_profile.png" alt="Profile View">
+                </div>
+            </div>
+        </section>
+
+        <section class="impact-section">
+            <div class="impact-card accent">
+                <div class="impact-content">
+                    <h2>Deep Dive or Quick Skim.</h2>
+                    <p>Whether you have 5 minutes or an hour, Daylines adapts. Read the full story or get the key
+                        takeaways immediately. Your news, your way.</p>
+                </div>
+                <div class="impact-image">
+                    <img src="assets/images/daylines_article.png" alt="Article Summary">
+                </div>
+            </div>
+        </section>
+
+        <section class="download-cta">
+            <h2>Experience Daylines</h2>
+            <div class="cta-buttons">
+                <a href="https://apps.apple.com/us/app/daylines/id6758858880" class="store-btn apple">
+                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                        alt="Download on the App Store">
+                </a>
+                <!--
+                <a href="#" class="store-btn google">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                        alt="Get it on Google Play">
+                </a>
+                -->
+            </div>
+        </section>
+
+        <footer>
+            <span class="footer-logo">Daylines</span>
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="index.html">David Raji</a>
+                <a href="mailto:david@peaktask.app">Support</a>
+            </div>
+            <p class="copyright">&copy; 2026 David Raji. All rights reserved.</p>
+        </footer>
+    </div>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
